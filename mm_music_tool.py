@@ -930,6 +930,127 @@ def action_repair_slots(songs):
     pause()
     return songs
 
+
+# ── export trader / types files ──────────────────────────────────────────────────────
+
+COLLECTIBLE_JSON = os.path.join(SCRIPT_DIR, "Collectible.json")
+TYPES_XML        = os.path.join(SCRIPT_DIR, "mm_music_types.xml")
+
+def action_export_collectible(songs):
+    import json as _json
+    print()
+    n = len(songs)
+    data = {
+        "m_Version": 12,
+        "DisplayName": "Collectible",
+        "Icon": "Deliver",
+        "Color": "FBFCFEFF",
+        "IsExchange": 0,
+        "InitStockPercent": 100,
+        "Items": [
+            {
+                "ClassName": "MM_Cassette_Song1",
+                "MaxPriceThreshold": 10582,
+                "MinPriceThreshold": 10582,
+                "SellPricePercent": 60,
+                "MaxStockThreshold": 1,
+                "MinStockThreshold": 1,
+                "QuantityPercent": 100,
+                "SpawnAttachments": [],
+                "Variants": [f"MM_Cassette_Song{i}" for i in range(2, n + 1)]
+            }
+        ]
+    }
+    out = prompt("Save Collectible.json to", COLLECTIBLE_JSON)
+    with open(out, "w", encoding="utf-8") as f:
+        _json.dump(data, f, indent="\t")
+    print(green(f"  \u2713 Collectible.json written with {n} cassettes \u2192 {out}"))
+    pause()
+
+def action_export_types(songs):
+    print()
+    n = len(songs)
+    template = (
+        '    <type name="MM_Cassette_Song{n}">\n'
+        '        <nominal>0</nominal>\n'
+        '        <lifetime>14400</lifetime>\n'
+        '        <restock>0</restock>\n'
+        '        <min>0</min>\n'
+        '        <quantmin>-1</quantmin>\n'
+        '        <quantmax>-1</quantmax>\n'
+        '        <cost>100</cost>\n'
+        '        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>\n'
+        '    </type>'
+    )
+    lines = ['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '<types>']
+    for i in range(1, n + 1):
+        lines.append(template.format(n=i))
+    lines.append('</types>')
+    out = prompt("Save mm_music_types.xml to", TYPES_XML)
+    with open(out, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+    print(green(f"  \u2713 mm_music_types.xml written with {n} entries \u2192 {out}"))
+    pause()
+
+def action_export_all_server_files(songs):
+    """Export config.cpp, Collectible.json, and mm_music_types.xml in one go."""
+    print()
+    print(bold("  Exporting all server files..."))
+    print()
+    write_config(songs)
+    import json as _json
+    n = len(songs)
+
+    # Collectible.json
+    data = {
+        "m_Version": 12,
+        "DisplayName": "Collectible",
+        "Icon": "Deliver",
+        "Color": "FBFCFEFF",
+        "IsExchange": 0,
+        "InitStockPercent": 100,
+        "Items": [
+            {
+                "ClassName": "MM_Cassette_Song1",
+                "MaxPriceThreshold": 10582,
+                "MinPriceThreshold": 10582,
+                "SellPricePercent": 60,
+                "MaxStockThreshold": 1,
+                "MinStockThreshold": 1,
+                "QuantityPercent": 100,
+                "SpawnAttachments": [],
+                "Variants": [f"MM_Cassette_Song{i}" for i in range(2, n + 1)]
+            }
+        ]
+    }
+    with open(COLLECTIBLE_JSON, "w", encoding="utf-8") as f:
+        _json.dump(data, f, indent="\t")
+    print(green(f"  \u2713 Collectible.json \u2192 {COLLECTIBLE_JSON}"))
+
+    # types XML
+    template = (
+        '    <type name="MM_Cassette_Song{n}">\n'
+        '        <nominal>0</nominal>\n'
+        '        <lifetime>14400</lifetime>\n'
+        '        <restock>0</restock>\n'
+        '        <min>0</min>\n'
+        '        <quantmin>-1</quantmin>\n'
+        '        <quantmax>-1</quantmax>\n'
+        '        <cost>100</cost>\n'
+        '        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>\n'
+        '    </type>'
+    )
+    lines = ['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '<types>']
+    for i in range(1, n + 1):
+        lines.append(template.format(n=i))
+    lines.append('</types>')
+    with open(TYPES_XML, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+    print(green(f"  \u2713 mm_music_types.xml \u2192 {TYPES_XML}"))
+    print()
+    print(green(f"  \u2713 All done! {n} cassettes across all 3 files."))
+    pause()
+
 # ── main menu ──────────────────────────────────────────────────────────────────
 
 
@@ -1017,6 +1138,9 @@ MENU = [
     ("Download all missing tracks",     action_download_missing),
     ("OGG file status",                 action_status),
     ("Export config.cpp",               action_export),
+    ("Export Collectible.json",          action_export_collectible),
+    ("Export mm_music_types.xml",        action_export_types),
+    ("Export ALL server files",          action_export_all_server_files),
     ("Import from existing config.cpp", action_import_config),
     ("Repair OGG slot alignment",        action_repair_slots),
     ("Quit",                            None),
