@@ -28,59 +28,8 @@ DATA_DIR    = os.path.join(MOD_DIR, "data")
 CONFIG_CPP  = os.path.join(MOD_DIR, "config.cpp")
 STATE_FILE  = os.path.join(SCRIPT_DIR, "mm_songs.json")
 
-# ── initial song list (your existing 50) ──────────────────────────────────────
-DEFAULT_SONGS = [
-    {"name": "Metallica - Wherever I May Roam",                  "desc": "From the Black Album.", "dur": 404, "yt": ""},
-    {"name": "Metallica - The Unforgiven",                        "desc": "From the Black Album.", "dur": 387, "yt": ""},
-    {"name": "Cheap Trick - I Want You To Want Me",               "desc": "Hell yeah",             "dur": 217, "yt": ""},
-    {"name": "White Zombie - Thunder Kiss 65",                    "desc": "Hell yeah",             "dur": 238, "yt": ""},
-    {"name": "Dire Straits - Sultans of Swing",                   "desc": "Hell yeah",             "dur": 346, "yt": ""},
-    {"name": "Ghost - Square Hammer",                             "desc": "Hell yeah",             "dur": 240, "yt": ""},
-    {"name": "The Prodigy - Smack My Bitch Up",                   "desc": "Hell yeah",             "dur": 343, "yt": ""},
-    {"name": "Oliver Tree - Cowboys Don't Cry",                   "desc": "Hell yeah",             "dur": 190, "yt": ""},
-    {"name": "Foo Fighters - Monkey Wrench",                      "desc": "Hell yeah",             "dur": 231, "yt": ""},
-    {"name": "Korn - Falling Away From Me",                       "desc": "Hell yeah",             "dur": 291, "yt": ""},
-    {"name": "Static-X - Love Dump",                              "desc": "Hell yeah",             "dur": 260, "yt": ""},
-    {"name": "Metallica - One",                                   "desc": "Hell yeah",             "dur": 446, "yt": ""},
-    {"name": "Audioslave - Cochise",                              "desc": "Hell yeah",             "dur": 222, "yt": ""},
-    {"name": "Dr.Dre - Nuthin' But A G Thang",                    "desc": "Hell yeah",             "dur": 238, "yt": ""},
-    {"name": "Alice in Chains - Dirt",                            "desc": "Hell yeah",             "dur": 317, "yt": ""},
-    {"name": "The Misfits - Scream!",                             "desc": "Hell yeah",             "dur": 154, "yt": ""},
-    {"name": "Metallica - No Leaf Clover (S&M)",                  "desc": "Hell yeah",             "dur": 343, "yt": ""},
-    {"name": "Static-X - Wisconsin Death Trip",                   "desc": "Hell yeah",             "dur": 189, "yt": ""},
-    {"name": "Dire Straits - Money for Nothing",                  "desc": "Hell yeah",             "dur": 246, "yt": ""},
-    {"name": "Metallica - Bleeding Me (S&M)",                     "desc": "Hell yeah",             "dur": 542, "yt": ""},
-    {"name": "The Offspring - Want you Bad",                      "desc": "Hell yeah",             "dur": 202, "yt": ""},
-    {"name": "Alice in Chains - Down in a Hole",                  "desc": "Hell yeah",             "dur": 338, "yt": ""},
-    {"name": "The Misfits - Decending Angel",                     "desc": "Hell yeah",             "dur": 226, "yt": ""},
-    {"name": "Alice in Chains - Would?",                          "desc": "Hell yeah",             "dur": 217, "yt": ""},
-    {"name": "Alice Cooper - Hey Stoopid",                        "desc": "Hell yeah",             "dur": 207, "yt": ""},
-    {"name": "Alice Cooper - Feed My Frankenstein",               "desc": "Hell yeah",             "dur": 285, "yt": ""},
-    {"name": "Bad Company - Bad Company",                         "desc": "Hell yeah",             "dur": 289, "yt": ""},
-    {"name": "Don Henley - Dirty Laundry",                        "desc": "Hell yeah",             "dur": 337, "yt": ""},
-    {"name": "Faith No More - We Care a Lot",                     "desc": "Hell yeah",             "dur": 250, "yt": ""},
-    {"name": "Genesis - Abacab",                                  "desc": "Hell yeah",             "dur": 424, "yt": ""},
-    {"name": "Genesis - Land of Confusion",                       "desc": "Hell yeah",             "dur": 286, "yt": ""},
-    {"name": "Genesis - Domino Medley",                           "desc": "Hell yeah",             "dur": 645, "yt": ""},
-    {"name": "Ice Cube - Gangsta Rap Made Me Do It",              "desc": "Hell yeah",             "dur": 282, "yt": ""},
-    {"name": "Metallica - Wasting My Hate",                       "desc": "Hell yeah",             "dur": 238, "yt": ""},
-    {"name": "Pantera - Walk",                                    "desc": "Hell yeah",             "dur": 315, "yt": ""},
-    {"name": "Red Hot Chili Peppers - Scar Tissue",               "desc": "Hell yeah",             "dur": 218, "yt": ""},
-    {"name": "Gorillaz - Tomorrow Comes Today",                   "desc": "Hell yeah",             "dur": 193, "yt": ""},
-    {"name": "Gorillaz - Starshine",                              "desc": "Hell yeah",             "dur": 211, "yt": ""},
-    {"name": "Gorillaz - Plastic Beach",                          "desc": "Hell yeah",             "dur": 249, "yt": ""},
-    {"name": "Soundgarden - Slaves & Bulldozers",                 "desc": "Hell yeah",             "dur": 419, "yt": ""},
-    {"name": "Soundgarden - Jesus Christ Pose",                   "desc": "Hell yeah",             "dur": 354, "yt": ""},
-    {"name": "Soundgarden - Searching with my Good Eye Closed",   "desc": "Hell yeah",             "dur": 392, "yt": ""},
-    {"name": "Soundgarden - Room a Thousand Years Wide",          "desc": "Hell yeah",             "dur": 247, "yt": ""},
-    {"name": "System of a Down - Kill Rock 'n Roll",              "desc": "Hell yeah",             "dur": 148, "yt": ""},
-    {"name": "System of a Down - Stealing Society",               "desc": "Hell yeah",             "dur": 178, "yt": ""},
-    {"name": "System of a Down - Cigaro",                         "desc": "Hell yeah",             "dur": 131, "yt": ""},
-    {"name": "System of a Down - Sad Statue",                     "desc": "Hell yeah",             "dur": 203, "yt": ""},
-    {"name": "System of a Down - Old School Hollywood",           "desc": "Hell yeah",             "dur": 176, "yt": ""},
-    {"name": "ZZ Top - Legs",                                     "desc": "Hell yeah",             "dur": 274, "yt": ""},
-    {"name": "ZZ Top - TV Dinners",                               "desc": "Hell yeah",             "dur": 239, "yt": ""},
-]
+# ── default song list (empty — users import their own tracks) ──────────────────────────
+DEFAULT_SONGS = []
 
 # ── helpers ────────────────────────────────────────────────────────────────────
 
@@ -106,11 +55,59 @@ def check_deps():
         ok = False
     return ok
 
+def parse_config_cpp(path):
+    """Parse an existing config.cpp and return a list of song dicts."""
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read()
+    pattern = re.compile(
+        r'(?://\s*YouTube:\s*(https?://\S+)\s*\n\s*)?' 
+        r'class MM_Cassette_Song(\d+)\s*:\s*Zen_Cassette_Base\s*\{[^}]*?' 
+        r'displayName\s*=\s*"([^"]+)"\s*;\s*' 
+        r'descriptionShort\s*=\s*"([^"]+)"\s*;\s*' 
+        r'playSeconds\s*=\s*(\d+)\s*;',
+        re.DOTALL
+    )
+    songs = []
+    for m in pattern.finditer(content):
+        songs.append((int(m.group(2)), {
+            "name": m.group(3),
+            "desc": m.group(4),
+            "dur":  int(m.group(5)),
+            "yt":   m.group(1) or "",
+        }))
+    songs.sort(key=lambda x: x[0])
+    return [s for _, s in songs]
+
 def load_songs():
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
-    return [dict(s) for s in DEFAULT_SONGS]
+    # First run — no json yet
+    print()
+    print(bold("  No mm_songs.json found — first run setup"))
+    print()
+    print("  Options:")
+    print("  1. Start fresh (empty mod)")
+    print("  2. Import from existing config.cpp")
+    print()
+    choice = prompt("Choose", "1")
+    if choice.strip() == "2":
+        default_cfg = CONFIG_CPP if os.path.exists(CONFIG_CPP) else ""
+        cfg_path = prompt("Path to config.cpp", default_cfg)
+        if os.path.exists(cfg_path):
+            try:
+                songs = parse_config_cpp(cfg_path)
+                save_songs(songs)
+                print(green(f"  ✓ Imported {len(songs)} songs from config.cpp"))
+                return songs
+            except Exception as e:
+                print(red(f"  ✗ Failed to parse config: {e}"))
+                print(yellow("  Starting with empty list instead."))
+        else:
+            print(yellow("  File not found. Starting with empty list."))
+    songs = list(DEFAULT_SONGS)
+    save_songs(songs)
+    return songs
 
 def save_songs(songs):
     with open(STATE_FILE, "w", encoding="utf-8") as f:
@@ -490,6 +487,48 @@ def action_export(songs):
     write_config(songs)
     pause()
 
+def action_import_config(songs):
+    """Import/merge songs from an existing config.cpp into the current list."""
+    print()
+    if songs:
+        print(yellow(f"  Warning: you already have {len(songs)} song(s) loaded."))
+        mode = prompt("  (r)eplace all or (a)ppend new songs only", "r").lower()
+    else:
+        mode = "r"
+
+    default_cfg = CONFIG_CPP if os.path.exists(CONFIG_CPP) else ""
+    cfg_path = prompt("Path to config.cpp", default_cfg)
+    if not os.path.exists(cfg_path):
+        print(red("  File not found."))
+        pause()
+        return songs
+
+    try:
+        imported = parse_config_cpp(cfg_path)
+    except Exception as e:
+        print(red(f"  Failed to parse config.cpp: {e}"))
+        pause()
+        return songs
+
+    if not imported:
+        print(red("  No songs found in that file."))
+        pause()
+        return songs
+
+    if mode == "r":
+        songs = imported
+        print(green(f"  ✓ Replaced with {len(songs)} songs from config.cpp"))
+    else:
+        existing_names = {s["name"].lower() for s in songs}
+        added = [s for s in imported if s["name"].lower() not in existing_names]
+        songs.extend(added)
+        print(green(f"  ✓ Appended {len(added)} new song(s) ({len(imported) - len(added)} already existed)"))
+
+    save_songs(songs)
+    write_config(songs)
+    pause()
+    return songs
+
 def action_status(songs):
     print()
     print(bold("  OGG file status"))
@@ -543,9 +582,10 @@ def action_export_template(songs):
     print()
     pause()
 
-def action_bulk_import(songs):
+def action_bulk_import(songs, csv_path=None):
     print()
-    csv_path = prompt("Path to CSV file", CSV_TEMPLATE)
+    if csv_path is None:
+        csv_path = prompt("Path to CSV file", CSV_TEMPLATE)
     if not os.path.exists(csv_path):
         print(red(f"  File not found: {csv_path}"))
         pause()
@@ -655,6 +695,241 @@ def action_bulk_import(songs):
     pause()
     return songs
 
+
+# ── build CSV from URL list ──────────────────────────────────────────────────────────────────
+
+URLS_FILE = os.path.join(SCRIPT_DIR, "mm_url_list.txt")
+URL_OUT    = os.path.join(SCRIPT_DIR, "mm_bulk_import.csv")
+
+def _clean_yt_title(raw_title):
+    """
+    Convert a raw YouTube video title into a clean "Artist - Song" display name.
+    Strips common suffixes like (Official Video), [Lyrics], etc.
+    """
+    import re as _re
+    # Remove bracketed/parenthesised noise
+    cleaned = _re.sub(
+        r'[\[\(](?:official\s*(?:music\s*)?(?:video|audio|lyric(?:s)?|4k|hd)?|'
+        r'lyrics?|visualizer|ft\.?.*?|feat\.?.*?|remastered.*?|\d{4}.*?)[\]\)]',
+        '', raw_title, flags=_re.IGNORECASE
+    )
+    # Strip trailing punctuation / whitespace
+    cleaned = _re.sub(r'[\s\-\|]+$', '', cleaned).strip()
+    return cleaned or raw_title.strip()
+
+def action_urls_to_csv(songs):
+    import yt_dlp as _ydl
+    print()
+    print(bold("  Build CSV from YouTube URL list"))
+    print()
+    print(dim(f"  Put one YouTube URL per line in a text file."))
+    print(dim(f"  Default location: {URLS_FILE}"))
+    print()
+
+    url_path = prompt("Path to URL list file", URLS_FILE)
+    if not os.path.exists(url_path):
+        # Offer to create it
+        create = prompt(f"File not found. Create it at {url_path}? (y/n)", "y").lower()
+        if create == "y":
+            with open(url_path, "w", encoding="utf-8") as f:
+                f.write("# Paste one YouTube URL per line. Lines starting with # are ignored.\n")
+            print(green(f"  \u2713 Created {url_path} — add your URLs then run this option again."))
+        pause()
+        return songs
+
+    with open(url_path, "r", encoding="utf-8") as f:
+        raw_lines = f.readlines()
+
+    urls = []
+    for line in raw_lines:
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        # Strip playlist params — keep only the video URL
+        clean = re.sub(r'[?&]list=[^&]*', '', line).strip()
+        # Convert youtu.be short links to full URLs (only if not already a full URL)
+        clean = re.sub(r'(?<!https://)youtu\.be/([A-Za-z0-9_-]{11})', r'https://www.youtube.com/watch?v=\1', clean)
+        # Also handle plain youtu.be without any preceding https://
+        if clean.startswith("youtu.be/"):
+            clean = "https://www.youtube.com/watch?v=" + clean[9:9+11]
+        if "youtube.com/watch?v=" in clean or "youtu.be/" in clean:
+            urls.append(clean)
+        else:
+            print(yellow(f"  Skipping unrecognised line: {line[:60]}"))
+
+    if not urls:
+        print(red("  No valid YouTube URLs found in file."))
+        pause()
+        return songs
+
+    print(bold(f"  Found {len(urls)} URL(s) — fetching titles and durations..."))
+    print()
+
+    rows = []
+    failed = []
+    opts = {"quiet": True, "no_warnings": True, "skip_download": True}
+
+    with _ydl.YoutubeDL(opts) as ydl:
+        for i, url in enumerate(urls, 1):
+            try:
+                info  = ydl.extract_info(url, download=False)
+                title = _clean_yt_title(info.get("title", ""))
+                dur   = info.get("duration", 0)
+
+                # Try to build "Artist - Title" from metadata if available
+                artist = info.get("artist") or info.get("creator") or ""
+                track  = info.get("track") or ""
+                if artist and track:
+                    display = f"{artist} - {track}"
+                else:
+                    display = title
+
+                rows.append({"name": display, "desc": "Hell yeah", "dur": dur, "yt": url})
+                status = green("\u2713")
+                print(f"  {status} [{i}/{len(urls)}] {display[:65]}")
+            except Exception as e:
+                failed.append((url, str(e)))
+                print(red(f"  \u2717 [{i}/{len(urls)}] {url[:60]}"))
+                print(dim(f"         {str(e)[:80]}"))
+
+    print()
+    if not rows:
+        print(red("  No tracks fetched successfully."))
+        pause()
+        return songs
+
+    # Write CSV
+    out_path = prompt("Save CSV to", URL_OUT)
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["name", "desc", "dur", "yt"])
+        for r in rows:
+            w.writerow([r["name"], r["desc"], r["dur"], r["yt"]])
+
+    print()
+    print(green(f"  \u2713 CSV written with {len(rows)} track(s) \u2192 {out_path}"))
+    if failed:
+        print(yellow(f"  {len(failed)} URL(s) failed:"))
+        for url, err in failed:
+            print(yellow(f"    \u00b7 {url}"))
+
+    print()
+    do_import = prompt("Import this CSV into your song list now? (y/n)", "y").lower()
+    if do_import == "y":
+        songs = action_bulk_import(songs, csv_path=out_path)
+
+    return songs
+
+
+# ── OGG slot repair ──────────────────────────────────────────────────────────────────
+
+def action_repair_slots(songs):
+    """
+    Shift all OGG files from a given slot onwards up or down by N positions.
+    Use this when OGG files are offset from the json/config metadata.
+    """
+    print()
+    print(bold("  OGG slot repair"))
+    print()
+    print(dim("  Use this when OGG files are misaligned with your song list."))
+    print(dim("  Example: song80.ogg plays the wrong track because an extra file"))
+    print(dim("  was inserted, shifting everything from slot 80 onwards up by 1."))
+    print()
+
+    # Show current OGG count for reference
+    ogg_files = sorted(
+        [f for f in os.listdir(DATA_DIR) if f.startswith("song") and f.endswith(".ogg")],
+        key=lambda f: int(re.search(r'\d+', f).group())
+    )
+    print(f"  OGG files on disk: {bold(str(len(ogg_files)))} "
+          f"(song{re.search(r'\d+', ogg_files[0]).group()} "
+          f"\u2192 song{re.search(r'\d+', ogg_files[-1]).group()})")
+    print(f"  Songs in list:     {bold(str(len(songs)))}")
+    print()
+
+    try:
+        from_slot = int(prompt("Shift OGGs starting from slot number"))
+        direction = prompt("Direction: (u)p to higher numbers or (d)own to lower numbers", "d").lower()
+        amount    = int(prompt("Shift by how many slots", "1"))
+    except ValueError:
+        print(red("  Invalid input."))
+        pause()
+        return songs
+
+    if direction not in ("u", "d"):
+        print(red("  Enter u or d."))
+        pause()
+        return songs
+
+    shift = amount if direction == "u" else -amount
+
+    # Find all OGGs at or beyond from_slot
+    affected = []
+    for f in ogg_files:
+        n = int(re.search(r'\d+', f).group())
+        if n >= from_slot:
+            affected.append(n)
+
+    if not affected:
+        print(yellow(f"  No OGG files found at slot {from_slot} or above."))
+        pause()
+        return songs
+
+    # Check for collisions at destination
+    destinations = [n + shift for n in affected]
+    min_dest = min(destinations)
+    if min_dest < 1:
+        print(red(f"  Shift would move files to slot {min_dest} which is invalid."))
+        pause()
+        return songs
+
+    print()
+    print(bold(f"  Will shift {len(affected)} OGG file(s) "
+               f"(slots {min(affected)}-{max(affected)}) "
+               f"{'up' if shift > 0 else 'down'} by {abs(shift)}"))
+    print(dim(f"  song{min(affected)}.ogg \u2192 song{min(affected)+shift}.ogg  ...  "
+              f"song{max(affected)}.ogg \u2192 song{max(affected)+shift}.ogg"))
+    print()
+    confirm = prompt("Proceed? This renames files on disk. (yes/n)", "n").lower()
+    if confirm != "yes":
+        print("  Cancelled.")
+        pause()
+        return songs
+
+    # Rename in the right order to avoid clobbering:
+    # shifting UP  → rename highest first (descending)
+    # shifting DOWN → rename lowest first (ascending)
+    ordered = sorted(affected, reverse=(shift > 0))
+
+    errors = []
+    renamed = 0
+    for n in ordered:
+        old = ogg_path(n)
+        new = ogg_path(n + shift)
+        if not os.path.exists(old):
+            continue
+        try:
+            if os.path.exists(new):
+                os.remove(new)
+            os.rename(old, new)
+            renamed += 1
+        except Exception as e:
+            errors.append(f"song{n}.ogg: {e}")
+
+    print()
+    if errors:
+        print(red(f"  {len(errors)} error(s):"))
+        for err in errors:
+            print(red(f"    {err}"))
+    print(green(f"  \u2713 Renamed {renamed} file(s)."))
+
+    # Verify alignment
+    present  = sum(1 for i in range(len(songs)) if ogg_exists(i + 1))
+    print(green(f"  \u2713 OGGs now matching song list: {present}/{len(songs)}"))
+    print()
+    pause()
+    return songs
+
 # ── main menu ──────────────────────────────────────────────────────────────────
 
 
@@ -733,6 +1008,7 @@ MENU = [
     ("List all cassettes",              action_list),
     ("Add new cassette",                action_add),
     ("Bulk import from CSV",            action_bulk_import),
+    ("Build CSV from YouTube URL list",  action_urls_to_csv),
     ("Generate blank CSV template",     action_export_template),
     ("Edit existing cassette",          action_edit),
     ("Remove cassette",                 action_delete),
@@ -741,6 +1017,8 @@ MENU = [
     ("Download all missing tracks",     action_download_missing),
     ("OGG file status",                 action_status),
     ("Export config.cpp",               action_export),
+    ("Import from existing config.cpp", action_import_config),
+    ("Repair OGG slot alignment",        action_repair_slots),
     ("Quit",                            None),
 ]
 
